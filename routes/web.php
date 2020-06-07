@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -67,4 +68,11 @@ Route::group(['prefix' => 'quiz'], function () {
     Route::put('/update/{id}', 'QuizController@update');
     Route::get('/delete/{id}', 'QuizController@delete');
 });
-
+Route::group(['prefix' => 'quiz-option'], function () {
+    Route::get('/', 'QuizOptionController@show');
+    Route::get('/add', 'QuizOptionController@add');
+    Route::post('/insert', 'QuizOptionController@insert');
+    Route::get('/edit/{id}', 'QuizOptionController@edit');
+    Route::put('/update/{id}', 'QuizOptionController@update');
+    Route::get('/delete/{id}', 'QuizOptionController@delete');
+});

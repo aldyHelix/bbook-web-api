@@ -23,47 +23,45 @@ class QuizController extends Controller
     public function insert(Request $request)
     {
         $data = $request->dt;
-        $data['password'] = Hash::make($data['password']);
 
-        if(Enduser::create($data))
+        if(Quiz::create($data))
         {
-            return redirect('end-user')->withSuccess(__("Successfuly Add User."));
+            return redirect()->back()->withSuccess(__("Successfuly Add Quiz."));
         }
         else
         {
-            return redirect('end-user')->withError(__("Failed Add User."));
+            return redirect()->back()->withError(__("Failed Add Quiz."));
         }
     }
     public function edit($id)
     {
-        $data['users'] = EndUser::where('id', $id)->first();
+        $data['users'] = Quiz::where('id', $id)->first();
         return view('users.add-edit', ['edit' => true], $data);
     }
     public function update(Request $request, $id)
     {
         $data = $request->dt;
-        $data['password'] = Hash::make($data['password']);
 
-        if(Enduser::where('id', $id)->update($data))
+        if(Quiz::where('id', $id)->update($data))
         {
-            return redirect('end-user')->withSuccess(__('Successfuly Update '.$data['name']));
+            return redirect()->back()->withSuccess(__('Successfuly Update Quiz'));
         }
         else
         {
-            return redirect('end-user')->withError(__("Failed Update User."));
+            return redirect()->back()->withError(__("Failed Update Quiz."));
         }
     }
     public function delete($id)
     {
-        $dt = EndUser::findOrFail($id);
+        $dt = Quiz::findOrFail($id);
         if(!empty($dt))
         {
-            EndUser::destroy($id);
-            return redirect('end-user')->withSuccess(__("Successfuly Deleted User."));
+            Quiz::destroy($id);
+            return redirect()->back()->withSuccess(__("Successfuly Deleted Quiz."));
         }
         else
         {
-            return redirect('end-user')->withError(__("Failed Deleted User."));
+            return redirect()->back()->withError(__("Failed Deleted Quiz."));
         }
     }
 }

@@ -129,15 +129,59 @@
             <div class="card">
                 <div class="card-body">
                     <p>{{$dt->question}}</p>
+                    <small>{{$dt->answer}}</small>
+                    <hr>
                     <ul class="list-group">
                         @if(count($dt->hasOption) != 0)
                         @foreach($dt->hasOption as $opt)
                             <li class="list-group-item d-flex justify-content-between align-items-center {{$opt->is_answer ? 'active' : ''}}"><span>{{$opt->option}}. {{$opt->description_option}}</span>
                                 <span class="badge ">
-                                <a data-toggle="modal" data-target="#delopt{{$dt->id}}"><i class="feather icon-edit cursor-pointer" href="#"></i></a>
-                                <a data-toggle="modal" data-target="#editopt{{$dt->id}}"><i class="feather icon-trash cursor-pointer" href="#"></i></a>
+                                <a data-toggle="modal" data-target="#editopt{{$opt->id}}"><i class="feather icon-edit cursor-pointer"></i></a>
+                                <a data-toggle="modal" data-target="#delopt{{$opt->id}}"><i class="feather icon-trash cursor-pointer"></i></a>
                                 </span>
                             </li>
+                            <div class="modal fade text-left" id="editopt{{$opt->id}}" tabindex="-1" role="dialog"
+                                aria-labelledby="myModalLabel17" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" role="document">
+                                    <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h4 class="modal-title" id="myModalLabel17">Edit Pilihan</h4>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                    {!! Form::open(['url' => 'quiz-option/update'.$opt->id , 'id' => 'form']) !!}
+                                    <div class="row">
+                                        <div class="form-group col-sm-6">
+                                            <label for="option">Pilihan Jawaban.</label>
+                                            <select name="dt[option]" id="option">
+                                                <option value="A">A</option>
+                                                <option value="B">B</option>
+                                                <option value="C">C</option>
+                                                <option value="D">D</option>
+                                            </select>
+                                        </div>
+                                        <div class="form-group col-sm-6">
+                                            <label for="answer">Opsi ini jawaban ?</label>
+                                            <select name="dt[is_answer]" id="answer">
+                                                <option value="1" {{$opt->is_answer ? 'selected' : ''}}>YA!</option>
+                                                <option value="0" {{$opt->is_answer ? 'selected' : ''}}>Tidak.</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                        <div class="form-group">
+                                            <label for="email">Deskripsi Pilihan</label>
+                                            <textarea type="text" class="form-control input-solid" placeholder="Deskripsi full" name="dt[description_option]">{{$opt->description_option}}</textarea>
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="submit" class="btn btn-primary">Simpan</button>
+                                    </div>
+                                    </form>
+                                    </div>
+                                </div>
+                            </div>
                         @endforeach
                         @else
                         <li class="list-group-item">No Option Found</li>
@@ -156,44 +200,83 @@
                     </div>
                 </div>
             </div>
-<!-- Modal edit quiz -->
-<div class="modal fade text-left" id="editquiz{{$dt->id}}" tabindex="-1" role="dialog"
-    aria-labelledby="myModalLabel17" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" role="document">
-        <div class="modal-content">
-        <div class="modal-header">
-            <h4 class="modal-title" id="myModalLabel17">Tambah Quiz</h4>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-            </button>
-        </div>
-        <div class="modal-body">
-        <form>
-           <input type="hidden" value="{{$materi->id}} name=dt[materi_id]">
-            <div class="form-group">
-                <label for="basicInputFile">Gambar Quiz</label>
-                <div class="custom-file">
-                    <input type="file" class="custom-file-input" id="inputGroupFile01" name="header">
-                    <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
+            <!-- Modal edit quiz -->
+            <div class="modal fade text-left" id="addopt{{$dt->id}}" tabindex="-1" role="dialog"
+                aria-labelledby="myModalLabel17" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" role="document">
+                    <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title" id="myModalLabel17">Tambah Pilihan</h4>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                    {!! Form::open(['url' => 'quiz-option/insert', 'id' => 'form']) !!}
+                    <input type="hidden" value="{{$dt->id}}" name=dt[quiz_id]">
+                    <div class="row">
+                        <div class="form-group col-sm-6">
+                            <label for="option">Pilihan Jawaban.</label>
+                            <select name="dt[option]" id="option">
+                                <option value="A">A</option>
+                                <option value="B">B</option>
+                                <option value="C">C</option>
+                                <option value="D">D</option>
+                            </select>
+                        </div>
+                        <div class="form-group col-sm-6">
+                            <label for="answer">Opsi ini jawaban ?</label>
+                            <select name="dt[is_answer]" id="answer">
+                                <option value="1">YA!</option>
+                                <option value="0">Tidak.</option>
+                            </select>
+                        </div>
+                    </div>
+                        <div class="form-group">
+                            <label for="email">Deskripsi Pilihan</label>
+                            <textarea type="text" class="form-control input-solid" placeholder="Deskripsi full" name="dt[description_option]"></textarea>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary">Simpan</button>
+                    </div>
+                    </form>
+                    </div>
                 </div>
             </div>
-            <div class="form-group">
-                <label for="email">Question</label>
-                <textarea type="text" class="form-control input-solid" placeholder="Deskripsi full" name="dt[description]"></textarea>
-            </div>
-            <div class="form-group">
-                <label for="email">Answer</label>
-                <textarea type="text" class="form-control input-solid" placeholder="Deskripsi full" name="dt[description]"></textarea>
-            </div>
-        </div>
-        <div class="modal-footer">
-            <button type="button" class="btn btn-primary" data-dismiss="modal">Accept</button>
-        </div>
-        </form>
-        </div>
-    </div>
-</div>
+            <!-- End Edit Quiz -->
             <!-- End Konten -->
+            <!-- add Quiz option -->
+            <div class="modal fade text-left" id="editquiz{{$dt->id}}" tabindex="-1" role="dialog"
+                aria-labelledby="myModalLabel17" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" role="document">
+                    <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title" id="myModalLabel17">Edit Quiz</h4>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                    {!! Form::open(['url' => 'quiz/update'.$dt->id , 'id' => 'form']) !!}
+                    <input type="hidden" value="{{$dt->id}}" name=dt[materi_id]">
+                        <div class="form-group">
+                            <label for="email">Question</label>
+                            <textarea type="text" class="form-control input-solid" placeholder="Pertanyaannya . . . " name="dt[question]">{{$dt->question}}</textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Answer</label>
+                            <textarea type="text" class="form-control input-solid" placeholder="Deskripsi Jawaban. . ." name="dt[answer]">{{$dt->answer}}</textarea>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary">Simpan</button>
+                    </div>
+                    </form>
+                    </div>
+                </div>
+            </div>
+            <!-- end add quiz option -->
         @endforeach
         @else
         <div class="card">
@@ -247,26 +330,19 @@
             </button>
         </div>
         <div class="modal-body">
-        <form>
-           <input type="hidden" value="{{$materi->id}} name=dt[materi_id]">
-            <div class="form-group">
-                <label for="basicInputFile">Gambar Quiz</label>
-                <div class="custom-file">
-                    <input type="file" class="custom-file-input" id="inputGroupFile01" name="header">
-                    <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
-                </div>
-            </div>
+        {!! Form::open(['url' => 'quiz/insert', 'id' => 'form']) !!}
+           <input type="hidden" value="{{$materi->id}}" name=dt[materi_id]">
             <div class="form-group">
                 <label for="email">Question</label>
-                <textarea type="text" class="form-control input-solid" placeholder="Deskripsi full" name="dt[description]"></textarea>
+                <textarea type="text" class="form-control input-solid" placeholder="Pertanyaannya . . . " name="dt[question]"></textarea>
             </div>
             <div class="form-group">
                 <label for="email">Answer</label>
-                <textarea type="text" class="form-control input-solid" placeholder="Deskripsi full" name="dt[description]"></textarea>
+                <textarea type="text" class="form-control input-solid" placeholder="Deskripsi Jawaban. . ." name="dt[answer]"></textarea>
             </div>
         </div>
         <div class="modal-footer">
-            <button type="button" class="btn btn-primary" data-dismiss="modal">Accept</button>
+        <button type="submit" class="btn btn-primary">Simpan</button>
         </div>
         </form>
         </div>
