@@ -18,10 +18,7 @@
                     title="@lang('Edit')" data-toggle="tooltip" data-placement="top">
                         <i class="feather icon-edit"></i>
                 </a>
-                <a href="{{ url('materi/delete/'.$d->id) }}" class="btn btn-icon"
-                    title="@lang('Delete')" data-toggle="tooltip" data-placement="top">
-                    <i class="feather icon-trash"></i>
-                </a>
+                <span class="btn btn-icon" data-toggle="modal" data-target="#delmateri{{$d->id}}"><a title="@lang('Hapus')" data-toggle="tooltip" data-placement="top"><i class="feather icon-trash"></i></a></span>
             </div>
           </div>
           <div class="card-content">
@@ -41,6 +38,27 @@
             </span>
           </div>
         </div>
+      </div>
+      <!-- delete option -->
+      <div class="modal fade text-left" id="delmateri{{$d->id}}" tabindex="-1" role="dialog"
+          aria-labelledby="myModalLabel17" aria-hidden="true">
+          <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" role="document">
+              <div class="modal-content">
+                  <div class="modal-header">
+                      <h4 class="modal-title" id="myModalLabel17">Hapus Materi</h4>
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                      </button>
+                  </div>
+                  <div class="modal-body">
+                      <p>Yakin akan menghapus materi ini?</p>
+                      <div class="modal-footer">
+                          <button type="button" class="btn btn-primary" data-dismiss="modal">Tidak</button>
+                          <a class="btn btn-danger" href="{{ url('materi/delete/'.$d->id) }}">HAPUS</a>
+                      </div>
+                  </div>
+              </div>
+          </div>
       </div>
     @endforeach
     @else

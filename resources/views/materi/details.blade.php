@@ -66,7 +66,7 @@
                         <div class="col-sm-1">
                             <a data-toggle="modal" data-target="#editkonten{{$dt->id}}"><i class="feather icon-edit cursor-pointer" href="#"></i></a>
                             <hr>
-                            <a class="danger" href="{{ url('konten/delete/'.$dt->id) }}"><i class="feather icon-trash cursor-pointer"></i></a>
+                            <a class="danger" data-toggle="modal" data-target="#deletekonten{{$dt->id}}"><i class="feather icon-trash cursor-pointer"></i></a>
                        </div>
                         <div class="modal fade text-left" id="editkonten{{$dt->id}}" tabindex="-1" role="dialog"
                             aria-labelledby="myModalLabel17" aria-hidden="true">
@@ -100,6 +100,27 @@
                                         <button type="submit" class="btn btn-primary">Simpan</button>
                                     </div>
                                     </form>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- delete option -->
+                        <div class="modal fade text-left" id="deletekonten{{$dt->id}}" tabindex="-1" role="dialog"
+                            aria-labelledby="myModalLabel17" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h4 class="modal-title" id="myModalLabel17">Hapus Konten</h4>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <p>Yakin akan menghapus pilihan ini?</p>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-primary" data-dismiss="modal">Tidak</button>
+                                            <a class="btn btn-danger" href="{{ url('konten/delete/'.$dt->id) }}">HAPUS</a>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -140,6 +161,7 @@
                                 <a data-toggle="modal" data-target="#delopt{{$opt->id}}"><i class="feather icon-trash cursor-pointer"></i></a>
                                 </span>
                             </li>
+                            <!-- edit option -->
                             <div class="modal fade text-left" id="editopt{{$opt->id}}" tabindex="-1" role="dialog"
                                 aria-labelledby="myModalLabel17" aria-hidden="true">
                                 <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" role="document">
@@ -151,7 +173,7 @@
                                         </button>
                                     </div>
                                     <div class="modal-body">
-                                    {!! Form::open(['url' => 'quiz-option/update'.$opt->id , 'id' => 'form']) !!}
+                                    {!! Form::open(['url' => 'quiz-option/update/'.$opt->id , 'id' => 'form']) !!}
                                     <div class="row">
                                         <div class="form-group col-sm-6">
                                             <label for="option">Pilihan Jawaban.</label>
@@ -179,6 +201,27 @@
                                         <button type="submit" class="btn btn-primary">Simpan</button>
                                     </div>
                                     </form>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- delete option -->
+                            <div class="modal fade text-left" id="delopt{{$opt->id}}" tabindex="-1" role="dialog"
+                                aria-labelledby="myModalLabel17" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h4 class="modal-title" id="myModalLabel17">Hapus Pilihan</h4>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <p>Yakin akan menghapus pilihan ini?</p>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-primary" data-dismiss="modal">Tidak</button>
+                                                <a class="btn btn-danger" href="{{ url('quiz-option/delete/'.$opt->id) }}">HAPUS</a>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -247,6 +290,7 @@
             <!-- End Edit Quiz -->
             <!-- End Konten -->
             <!-- add Quiz option -->
+            <!-- quiz edit -->
             <div class="modal fade text-left" id="editquiz{{$dt->id}}" tabindex="-1" role="dialog"
                 aria-labelledby="myModalLabel17" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" role="document">
@@ -258,7 +302,7 @@
                         </button>
                     </div>
                     <div class="modal-body">
-                    {!! Form::open(['url' => 'quiz/update'.$dt->id , 'id' => 'form']) !!}
+                    {!! Form::open(['url' => 'quiz/update/'.$dt->id , 'id' => 'form']) !!}
                     <input type="hidden" value="{{$dt->id}}" name=dt[materi_id]">
                         <div class="form-group">
                             <label for="email">Question</label>
@@ -273,6 +317,27 @@
                     <button type="submit" class="btn btn-primary">Simpan</button>
                     </div>
                     </form>
+                    </div>
+                </div>
+            </div>
+            <!-- quiz delete -->
+            <div class="modal fade text-left" id="delquiz{{$dt->id}}" tabindex="-1" role="dialog"
+                aria-labelledby="myModalLabel17" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h4 class="modal-title" id="myModalLabel17">Hapus Quiz</h4>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <p>Yakin akan menghapus quiz ini?</p>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-primary" data-dismiss="modal">Tidak</button>
+                                <a class="btn btn-danger" href="{{ url('quiz/delete/'.$dt->id) }}">HAPUS</a>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
