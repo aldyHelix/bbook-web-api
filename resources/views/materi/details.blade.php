@@ -173,7 +173,7 @@
                                         </button>
                                     </div>
                                     <div class="modal-body">
-                                    {!! Form::open(['url' => 'quiz-option/update/'.$opt->id , 'id' => 'form']) !!}
+                                    {!! Form::open(['url' => 'quiz-option/update/'.$opt->id , 'id' => 'form', 'method'=>'put']) !!}
                                     <div class="row">
                                         <div class="form-group col-sm-6">
                                             <label for="option">Pilihan Jawaban.</label>
@@ -302,7 +302,7 @@
                         </button>
                     </div>
                     <div class="modal-body">
-                    {!! Form::open(['url' => 'quiz/update/'.$dt->id , 'id' => 'form']) !!}
+                    {!! Form::open(['url' => 'quiz/update/'.$dt->id , 'id' => 'form', 'method'=>'put']) !!}
                     <input type="hidden" value="{{$dt->id}}" name=dt[materi_id]">
                         <div class="form-group">
                             <label for="email">Question</label>
