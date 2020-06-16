@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use Carbon\Carbon;
 use App\User;
 use App\Materi;
+use App\Quiz;
 use Illuminate\Support\Facades\Auth;
 use Validator;
 use Illuminate\Support\Facades\Hash;
@@ -100,5 +101,16 @@ class UserAuthController extends Controller
     {
         $data = Materi::with('kontenMateri')->with('quizMateri')->with('quizMateri.hasOption')->findOrFail($id);
         return response($data, 200);
+    }
+    public function getMateriQuiz($id)
+    {
+        //id = materi id
+        //item = quiz id
+        $data = Quiz::where('materi_id', $id)->with('hasOption')->get();
+        return response([
+            'success' => true,
+            'message' => 'get quiz from materi id' . $id,
+            'data' => $data
+        ]);
     }
 }

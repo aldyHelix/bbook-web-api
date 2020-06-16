@@ -20,4 +20,5 @@ class ApiMateriController extends Controller
             'data' => $data
         ], 200);
     }
+
 }

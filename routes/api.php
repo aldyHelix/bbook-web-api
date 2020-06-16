@@ -24,6 +24,7 @@ use Illuminate\Support\Facades\Route;
     Route::group(['middleware' => 'auth:api'], function(){
         Route::get('/materi', 'API\UserAuthController@materi');
         Route::get('/get-materi/{id}', 'API\UserAuthController@getMateri');
+        Route::get('/get-materi-quiz/{id}', 'API\UserAuthController@getMateriQuiz');
         Route::get('/logout', 'API\UserAuthController@logout');
         Route::get('/user', 'API\UserAuthController@user');
     });
