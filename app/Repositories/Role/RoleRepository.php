@@ -3,7 +3,7 @@
 namespace App\Repositories\Role;
 
 use App\Repositories\Role\RoleInterface as RoleInterface;
-use Spatie\Permission\Models\Role;
+use Spatie\Permission\Models\Role as Role;
 
 class RoleRepository implements RoleInterface
 {

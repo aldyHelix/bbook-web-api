@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use Spatie\Permission\Models\Role;
+use Spatie\Permission\Models\Role as Role;
 use Spatie\Permission\Models\Permission;
 use DB;
 use App\Http\Requests\RoleRequest;
@@ -27,7 +27,7 @@ class RoleController extends Controller
     function __construct(
         RoleInterface $roleRepository,
         RoleService $roleService,
-        Permission $permissionRepository
+        PermissionInterface $permissionRepository
     )
     {
          $this->middleware('permission:role-list|role-create|role-edit|role-delete', ['only' => ['index','store']]);

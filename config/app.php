@@ -181,7 +181,10 @@ return [
          *  Modules Feauture Service Providers ...
          */
         App\Repositories\User\UserServiceProvider::class,
-
+        App\Repositories\Role\RoleServiceProvider::class,
+        App\Repositories\Raw\RawServiceProvider::class,
+        App\Repositories\Permission\PermissionServiceProvider::class,
+        App\Repositories\Materi\MateriServiceProvider::class,
     ],
 
     /*
