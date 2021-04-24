@@ -20,3 +20,8 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 Route::get('/materi', [Materi::class, 'index'])->name('api-materi');
+//lastadded
+//findbykey
+//findbyid
+//quizlist
+//register     

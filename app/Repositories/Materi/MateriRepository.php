@@ -19,6 +19,27 @@ class MateriRepository implements MateriInterface
 
 	public function getMateri()
 	{
-		return $this->materi->with('materiGallery')->get();
+		return $this->materi->get();
+	}
+
+	public function getMateriById($id)
+	{
+		return $this->materi->find($id);
+	}
+
+	public function getMateriOrderByLastAdded()
+	{
+		return $this->materi->orderBy('created_at', 'desc')->get();
+	}
+
+	public function getMateriByKey($key)
+	{
+		return $this->materi->where('name', $key)
+			->orWhere('name', 'like', '%' . $key . '%')->get();
+	}
+
+	public function getQuizByMateriId($id)
+	{
+		return $this->materi->find($id)->quiz()->get();
 	}
 }
