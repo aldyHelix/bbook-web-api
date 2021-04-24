@@ -49,33 +49,35 @@
                     <input type="text" class="form-control input-solid" placeholder="Nama Materi" name="dt[nama_materi]" value="{{ $edit ? $materis->nama_materi : old('nama_materi') }}" required>
                 </div>
                 <div class="form-group">
-                    <label for="basicInputFile">Gambar Materi</label>
-                    <div class="custom-file">
-                        <input type="file" class="form-control custom-file-input" id="inputGroupFile02" name="gambar">
-                        <label class="custom-file-label" for="inputGroupFile02">Choose file</label>
-                    </div>
-                </div>
-                <div class="form-group">
                     <label for="department">Video Link</label>
-                    <input type="text" class="form-control input-solid" placeholder="Link Video untuk ditampilkan" name="dt[video_link_materi]" value="{{ $edit ? $materis->video_link_materi : old('video_link_materi') }}">
+                    <input type="text" class="form-control input-solid" placeholder="Link Video untuk ditampilkan" name="dt[video_stream]" value="{{ $edit ? $materis->video_stream : old('video_stream') }}">
                 </div>
                 <div class="row">
                     <div class="col-md-6">
                         <div class="form-group">
-                            <label for="username">Deskripsi</label>
-                            <input type="text" class="form-control input-solid" placeholder="Deskripsi Singkat" name="dt[deskripsi]" value="{{ $edit ? $materis->deskripsi : old('deskripsi') }}" required>
+                            <label for="basicInputFile">Gambar Materi</label>
+                            <div class="custom-file">
+                                <input type="file" class="form-control custom-file-input" id="inputGroupFile02" name="gambar">
+                                <label class="custom-file-label" for="inputGroupFile02">Choose file</label>
+                            </div>
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">
                             <label for="department">Kode QR</label>
-                            <input type="text" class="form-control input-solid" placeholder="insert kode untuk dijadikan QR" name="dt[qr]" value="{{ $edit ? $materis->qr : old('qr') }}" required>
+                            <input type="text" class="form-control input-solid" placeholder="insert kode untuk dijadikan QR" name="dt[qr_code]" value="{{ $edit ? $materis->qr_code : old('qr_code') }}" required>
                         </div>
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="email">Full Deskripsi</label>
-                    <textarea type="text" class="form-control input-solid" placeholder="Deskripsi full" name="dt[fill_deskripsi]">{{ $edit ? $materis->fill_deskripsi : old('fill_deskripsi') }}</textarea>
+                    <label for="email">Header</label>
+                    <textarea type="text" class="form-control input-solid" placeholder="Deskripsi full" name="dt[header]">{{ $edit ? $materis->header : old('header') }}</textarea>
+                </div>
+                <div class="form-group">
+                    <label for="email">Konten</label>
+                    <textarea type="text" id='konten' class="form-control input-solid editor" name="dt[konten]">
+                        {{ $edit ? htmlspecialchars($materis->konten ): old('konten') }}
+                    </textarea>    
                 </div>
             </div>
         </div>
@@ -86,3 +88,14 @@
 </button>
 </form>
 @stop
+@section('scripts2')
+<script src="{{asset('assets/ckeditor/ckeditor.js')}}"></script>
+<script>
+   var konten = document.getElementById("konten");
+     CKEDITOR.replace(konten,{
+     language:'en-gb'
+   });
+   CKEDITOR.config.allowedContent = true;
+</script>
+    <script src="{{ asset(('mix-assets/js/scripts/editors/editor-quill.js')) }}"></script>
+@endsection

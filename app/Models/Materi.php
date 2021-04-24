@@ -18,8 +18,4 @@ class Materi extends Model
     {
         return asset('uploads/konten/blank.png');
     }
-    public function materiGallery()
-    {
-        return $this->hasMany(MateriGallery::class, 'materi_id');
-    }
 }

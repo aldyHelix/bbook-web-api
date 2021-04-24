@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController as Home;
 use App\Http\Controllers\RoleController as Role;
 use App\Http\Controllers\UserController as User;
+use App\Http\Controllers\MateriController as Materi;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -35,6 +36,16 @@ Route::group(['middleware' => ['auth']], function() {
     Route::resource('users', User::class);
 
     /**Custom Controller */
+     Route::group(['prefix' => 'materi'], function () {
+         Route::get('/', [Materi::class, 'index'])->name('materi-index');
+         Route::get('/add', [Materi::class, 'add'])->name('materi-add');
+         Route::get('/detail/{id}', [Materi::class, 'showDetails'])->name('materi-details');
+    //     Route::post('/insert', 'MateriController@insert');
+         Route::get('/edit/{id}', [Materi::class, 'edit'])->name('materi-edit');
+    //     Route::put('/update/{id}', 'MateriController@update');
+    //     Route::get('/delete/{id}', 'MateriController@delete');
+     });
+
 });
 
 

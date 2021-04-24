@@ -45,7 +45,7 @@
 
 @guest
 <body>
-<div class="app-content content ">
+<div class="app-content content" style="margin-left: 0;">
     <div class="content-wrapper">
         @yield('content')
     </div>
