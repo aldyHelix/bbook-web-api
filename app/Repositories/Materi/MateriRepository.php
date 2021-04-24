@@ -29,13 +29,13 @@ class MateriRepository implements MateriInterface
 
 	public function getMateriOrderByLastAdded()
 	{
-		return $this->materi->orderBy('created_at', 'desc')->get();
+		return $this->materi->orderBy('created_at', 'desc')->take(10)->get();
 	}
 
 	public function getMateriByKey($key)
 	{
-		return $this->materi->where('name', $key)
-			->orWhere('name', 'like', '%' . $key . '%')->get();
+		return $this->materi->where('nama_materi', $key)
+			->orWhere('nama_materi', 'like', '%' . $key . '%')->get();
 	}
 
 	public function getQuizByMateriId($id)
