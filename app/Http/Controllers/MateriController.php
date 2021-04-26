@@ -35,9 +35,50 @@ class MateriController extends Controller
         return view('materi.add-edit', ['edit'=>false]);
     }
 
+    public function insert(Request $request)
+    {
+        $created = $this->materiService->createMateri($request);
+        if($created)
+        {
+            return redirect('materi')->withSuccess(__("Successfuly Add New Materi."));
+        }
+        else
+        {
+            return redirect('materi')->withError(__("Failed Add Materi."));
+        }
+    }
+
     public function edit($id)
     {
         $data['materis'] = $this->materiRepository->getMateriById($id);
         return view('materi.add-edit', ['edit' => true] ,$data);
+    }
+
+    public function update(Request $request, $id)
+    {
+        $updated = $this->materiService->updateMateri($request, $id);
+
+        if($updated)
+        {
+            return redirect('materi')->withSuccess(__('Successfuly Update Data'));
+        }
+        else
+        {
+            return redirect('materi')->withError(__("Failed Update Materi."));
+        }
+    }
+
+    public function destroy($id)
+    {
+        $deleted= $this->materiService->deleteMateri($id);
+
+        if($deleted)
+        {
+            return redirect('materi')->withSuccess(__("Successfuly Deleted Materi."));
+        }
+        else 
+        {
+            return redirect('materi')->withError(__("Failed Deleted Materi."));
+        }
     }
 }

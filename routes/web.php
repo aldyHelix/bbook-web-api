@@ -43,7 +43,7 @@ Route::group(['middleware' => ['auth']], function() {
     //     Route::post('/insert', 'MateriController@insert');
          Route::get('/edit/{id}', [Materi::class, 'edit'])->name('materi-edit');
     //     Route::put('/update/{id}', 'MateriController@update');
-    //     Route::get('/delete/{id}', 'MateriController@delete');
+         Route::get('/delete/{id}', [Materi::class, 'destroy'])->name('materi-delete');
      });
 
 });
