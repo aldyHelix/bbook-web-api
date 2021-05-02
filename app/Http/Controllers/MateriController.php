@@ -81,4 +81,17 @@ class MateriController extends Controller
             return redirect('materi')->withError(__("Failed Deleted Materi."));
         }
     }
+
+    public function updateKonten(Request $request, $id)
+    {
+        $updated = $this->materiService->updateKonten($request, $id);
+        if($updated)
+        {
+            return redirect()->back()->withSuccess(__("Successfuly Update Konten."));
+        }   
+        else
+        {
+            return redirect()->back()->withError(__("Failed Update Konten."));
+        }
+    }
 }

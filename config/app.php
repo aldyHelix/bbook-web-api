@@ -185,6 +185,7 @@ return [
         App\Repositories\Raw\RawServiceProvider::class,
         App\Repositories\Permission\PermissionServiceProvider::class,
         App\Repositories\Materi\MateriServiceProvider::class,
+        App\Repositories\Quiz\QuizServiceProvider::class,
     ],
 
     /*

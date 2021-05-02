@@ -65,7 +65,7 @@
                     <div class="col-md-6">
                         <div class="form-group">
                             <label for="department">Kode QR</label>
-                            <input type="text" class="form-control input-solid" placeholder="insert kode untuk dijadikan QR" name="dt[qr_code]" value="{{ $edit ? $materis->qr_code : old('qr_code') }}" required>
+                            <input type="text" class="form-control input-solid" placeholder="insert kode untuk dijadikan QR" name="dt[qr_code]" value="{{ $edit ? $materis->qr_code : 'bbook_'.strtotime('now') }}" readonly>
                         </div>
                     </div>
                 </div>

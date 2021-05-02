@@ -5,6 +5,8 @@ use App\Http\Controllers\HomeController as Home;
 use App\Http\Controllers\RoleController as Role;
 use App\Http\Controllers\UserController as User;
 use App\Http\Controllers\MateriController as Materi;
+use App\Http\Controllers\QuizController as Quiz;
+use App\Http\Controllers\QuizOptionController as QuizOption;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -40,12 +42,30 @@ Route::group(['middleware' => ['auth']], function() {
          Route::get('/', [Materi::class, 'index'])->name('materi-index');
          Route::get('/add', [Materi::class, 'add'])->name('materi-add');
          Route::get('/detail/{id}', [Materi::class, 'showDetails'])->name('materi-details');
-    //     Route::post('/insert', 'MateriController@insert');
+         Route::post('/insert', [Materi::class, 'insert'])->name('materi-insert');
          Route::get('/edit/{id}', [Materi::class, 'edit'])->name('materi-edit');
-    //     Route::put('/update/{id}', 'MateriController@update');
+         Route::put('/update/{id}', [Materi::class, 'update'])->name('materi-update');
          Route::get('/delete/{id}', [Materi::class, 'destroy'])->name('materi-delete');
+         Route::put('/update/content/{id}', [Materi::class, 'updateKonten'])->name('materi-update-konten');
      });
 
+     Route::group(['prefix' => 'quiz'], function () {
+        Route::get('/', [Quiz::class, 'show']);
+        Route::get('/add', [Quiz::class, 'add']);
+        Route::post('/insert', [Quiz::class, 'insert']);
+        Route::get('/edit/{id}', [Quiz::class, 'edit']);
+        Route::put('/update/{id}', [Quiz::class, 'update']);
+        Route::get('/delete/{id}', [Quiz::class, 'delete']);
+    });
+
+    Route::group(['prefix' => 'quiz-option'], function () {
+        Route::get('/', [QuizOption::class, 'show']);
+        Route::get('/add', [QuizOption::class, 'add']);
+        Route::post('/insert', [QuizOption::class, 'insert']);
+        Route::get('/edit/{id}', [QuizOption::class, 'edit']);
+        Route::put('/update/{id}', [QuizOption::class, 'update']);
+        Route::get('/delete/{id}', [QuizOption::class, 'delete']);
+    });
 });
 
 

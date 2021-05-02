@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Repositories\Quiz\QuizInterface;
-use App\Services\MateriService;
+use App\Services\QuizService;
 
 class QuizController extends Controller
 {

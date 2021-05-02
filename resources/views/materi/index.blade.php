@@ -22,7 +22,7 @@
             </div>
           </div>
           <div class="card-content">
-            @if($d->gambar_materi != null )
+            @if($d->image != null )
             <img class="img-fluid" src="{{ $d->getPhoto() }}">
             @else
             <img class="img-fluid" src="{{ defaultPhoto() }}">
