@@ -1,5 +1,5 @@
 ---
 deployment:
   tasks:
-    - export DEPLOYPATH=/home/bbon5688/repositories/bbook-web-api/
+    - export DEPLOYPATH=/home/bbon5688/repositories/bbook-web-api
     - /bin/cp -R images $DEPLOYPATH
