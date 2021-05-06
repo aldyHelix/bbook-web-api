@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\API\MateriController as Materi;
+use App\Http\Controllers\API\QuizController as Quiz;
 use App\Http\Controllers\API\UserAuthController as UserAuth;
 /*
 |--------------------------------------------------------------------------
@@ -23,6 +24,8 @@ Route::get('/materi', [Materi::class, 'index'])->name('api-materi-index');
 Route::get('/materi/latest', [Materi::class, 'getLatestMateri'])->name('api-materi-latest');
 Route::get('/materi/search/{key}', [Materi::class, 'getByKeySearchMateri'])->name('api-materi-search');
 Route::get('/materi/{id}', [Materi::class, 'getByIdMateri'])->name('api-materi-id');
+
+Route::get('/quiz/{id}', [Quiz::class, 'getQuizByMateriId'])->name('api-quiz-materi-id');
 
 Route::post('/login', [UserAuth::class, 'login']);
 Route::post('/register', [UserAuth::class, 'register']);
