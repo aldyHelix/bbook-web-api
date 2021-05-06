@@ -1,7 +1,11 @@
 <?php
-
-    class Helper {
-        public function time_elapsed_string($datetime, $full = false) 
+namespace App\Helper;
+ 
+use Illuminate\Support\Facades\DB;
+use DateTime;
+ 
+class Helpers {
+	public static function time_elapsed_string($datetime, $full = false) 
         {
             $now = new DateTime;
             $ago = new DateTime($datetime);
@@ -35,5 +39,4 @@
         {
             return asset('uploads/konten/blank.png');
         }
-    }
-    
+}

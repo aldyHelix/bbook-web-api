@@ -41,7 +41,7 @@
             <div class="card-body">
                 <div class="d-flex justify-content-start align-items-center mb-1">
                     <div class="avatar mr-1">
-                        <img src="{{ $materi->image != null ? $materi->getPhoto() : defaultPhoto() }}"
+                        <img src="{{ $materi->image != null ? $materi->getPhoto() : asset('uploads/konten/blank.png') }}"
                             alt="avtar img holder" height="45" width="45">
                     </div>
                     <div class="user-page-info">

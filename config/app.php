@@ -186,6 +186,7 @@ return [
         App\Repositories\Permission\PermissionServiceProvider::class,
         App\Repositories\Materi\MateriServiceProvider::class,
         App\Repositories\Quiz\QuizServiceProvider::class,
+        App\Providers\HelperServiceProvider::class,
     ],
 
     /*
@@ -238,7 +239,8 @@ return [
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
         'Debugbar' => Barryvdh\Debugbar\Facade::class,
-        'QR' => SimpleSoftwareIO\QrCode\Facades\QrCode::class
+        'QR' => SimpleSoftwareIO\QrCode\Facades\QrCode::class,
+        'Helpers' => App\Helper\Helpers::class,
     ],
 
 ];

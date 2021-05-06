@@ -39,7 +39,7 @@
                 </p>
                 @else
                 <p>
-                    <img class="img-fluid" src="{{ defaultPhoto() }}">
+                    <img class="img-fluid" src="{{ asset('uploads/konten/blank.png') }}">
                 </p>
                 @endif
             </div>

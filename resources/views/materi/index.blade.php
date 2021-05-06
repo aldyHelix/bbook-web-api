@@ -25,14 +25,14 @@
             @if($d->image != null )
             <img class="img-fluid" src="{{ $d->getPhoto() }}">
             @else
-            <img class="img-fluid" src="{{ defaultPhoto() }}">
+            <img class="img-fluid" src="{{ asset('uploads/konten/blank.png') }}">
             @endif
             <div class="card-body">
               <p class="card-text">{{$d->deskripsi}}</p>
             </div>
           </div>
           <div class="card-footer text-muted">
-            <span class="float-left">Updated {{ time_elapsed_string($d->updated_at)}}</span>
+            <span class="float-left">Updated {{ Helpers::time_elapsed_string($d->updated_at)}}</span>
             <span class="float-right">
               <a href="{{ url('materi/detail/'.$d->id) }}" class="card-link">More Details <i class="fa fa-angle-right"></i></a>
             </span>
