@@ -52,6 +52,16 @@ class MateriController extends Controller
         ], 200);
     }
 
+    public function getByQrKeySearchMateri($key)
+    {
+        $data = $this->materiRepository->getMateriByQrKey($key);
+        return response([
+            'success' => true,
+            'message' => 'Qr Materi result',
+            'data' => $data
+        ], 200);
+    }
+
     public function getByIdMateri($id)
     {
         $data = $this->materiRepository->getMateriById($id);

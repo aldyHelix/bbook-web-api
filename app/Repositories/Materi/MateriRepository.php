@@ -38,6 +38,12 @@ class MateriRepository implements MateriInterface
 			->orWhere('nama_materi', 'like', '%' . $key . '%')->get();
 	}
 
+	public function getMateriByQrKey($key)
+	{
+		return $this->materi->where('qr_code', $key)
+			->orWhere('qr_code', 'like', '%' . $key . '%')->get();
+	}
+
 	public function getQuizByMateriId($id)
 	{
 		return $this->materi->find($id)->quiz()->get();

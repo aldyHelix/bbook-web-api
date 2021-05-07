@@ -23,6 +23,8 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::get('/materi', [Materi::class, 'index'])->name('api-materi-index');
 Route::get('/materi/latest', [Materi::class, 'getLatestMateri'])->name('api-materi-latest');
 Route::get('/materi/search/{key}', [Materi::class, 'getByKeySearchMateri'])->name('api-materi-search');
+Route::get('/materi/qr/{key}', [Materi::class, 'getByQrKeySearchMateri'])->name('api-materi-qr-search');
+
 Route::get('/materi/{id}', [Materi::class, 'getByIdMateri'])->name('api-materi-id');
 
 Route::get('/quiz/{id}', [Quiz::class, 'getQuizByMateriId'])->name('api-quiz-materi-id');
