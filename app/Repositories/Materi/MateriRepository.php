@@ -40,8 +40,7 @@ class MateriRepository implements MateriInterface
 
 	public function getMateriByQrKey($key)
 	{
-		return $this->materi->where('qr_code', $key)
-			->orWhere('qr_code', 'like', '%' . $key . '%')->first();
+		return $this->materi->where('qr_code', $key)->first();
 	}
 
 	public function getQuizByMateriId($id)
