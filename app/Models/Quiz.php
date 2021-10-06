@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Quiz extends Model
 {
     use HasFactory;
-    protected $table = 'quizs';
+    protected $table = 'questions';
 
 
     /**
@@ -17,10 +17,15 @@ class Quiz extends Model
      * @var array
      */
     protected $fillable = [
-        'materi_id',
-        'question',
-        'is_picture_quiz',
-        'answer'
+        'question_text',
+        'order',
+        'text_option_a',
+        'text_option_b',
+        'text_option_c',
+        'text_option_d',
+        'text_option_e',
+        'point',
+        'answer',
     ];
 
     public function materiQuiz()

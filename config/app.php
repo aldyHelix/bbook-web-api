@@ -186,6 +186,8 @@ return [
         App\Repositories\Permission\PermissionServiceProvider::class,
         App\Repositories\Materi\MateriServiceProvider::class,
         App\Repositories\Quiz\QuizServiceProvider::class,
+        App\Repositories\MateriImage\MateriImageServiceProvider::class,
+        App\Repositories\MateriVideo\MateriVideoServiceProvider::class,
         App\Providers\HelperServiceProvider::class,
     ],
 

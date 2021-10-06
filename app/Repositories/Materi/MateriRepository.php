@@ -19,12 +19,12 @@ class MateriRepository implements MateriInterface
 
 	public function getMateri()
 	{
-		return $this->materi->get();
+		return $this->materi->orderBy('order', 'asc')->get();
 	}
 
 	public function getMateriById($id)
 	{
-		return $this->materi->find($id);
+		return $this->materi->with('materiImage', 'materiVideo')->find($id);
 	}
 
 	public function getMateriOrderByLastAdded()

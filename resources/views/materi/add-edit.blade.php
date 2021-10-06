@@ -52,6 +52,10 @@
                     <label for="department">Video Link</label>
                     <input type="text" class="form-control input-solid" placeholder="Link Video untuk ditampilkan" name="dt[video_stream]" value="{{ $edit ? $materis->video_stream : old('video_stream') }}">
                 </div>
+                <div class="form-group">
+                    <label for="department">Urutan Materi</label>
+                    <input type="text" class="form-control input-solid" placeholder="Urutan Materi" name="dt[order]" value="{{ $edit ? $materis->order : old('order') }}">
+                </div>
                 <div class="row">
                     <div class="col-md-6">
                         <div class="form-group">

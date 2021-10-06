@@ -22,7 +22,8 @@ class Materi extends Model
         'qr_code',
         'video_stream',
         'image',
-        'status'
+        'status',
+        'order'
     ];
 
     public function getPhoto()
@@ -54,5 +55,15 @@ class Materi extends Model
         {
             return $match[1] = null;
         }
+    }
+
+    public function materiVideo()
+    {
+        return $this->hasMany(MateriVideo::class, 'materi_id','id')->orderBy('order');
+    }
+
+    public function materiImage()
+    {
+        return $this->hasMany(MateriImage::class, 'materi_id', 'id')->orderBy('order');
     }
 }

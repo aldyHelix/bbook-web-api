@@ -10,7 +10,7 @@
 <li class="breadcrumb-item">
     <a href="{{ url('/materi') }}">@lang('Materi')</a>
 </li>
-<li class="breadcrumb-item active">Details</li>
+<li class="breadcrumb-item active">Detail</li>
 @stop
 
 @section('content')
@@ -28,11 +28,11 @@
                     <h6 class="mb-0">Dibuat :</h6>
                     <p>{{ date_format(date_create($materi->created_at), "d-m-Y") }}</p>
                 </div>
-                <div class="mt-1">
+                {{-- <div class="mt-1">
                     <h6 class="mb-0">QR:</h6>
                     <small>QR dapat ditempatkan di Buku Cetak untuk di scan.</small>
                     {!! QR::size(200)->generate($materi->qr_code) !!}
-                </div>
+                </div> --}}
             </div>
         </div>
     </div>
@@ -49,195 +49,61 @@
                     </div>
                 </div>
                 {{-- <iframe src="" class="w-100 height-250"></iframe> --}}
-                {!!$materi->getYoutubeID() ? '<iframe src="//www.youtube.com/embed/'.$materi->getYoutubeID().'" class="w-100 height-250"></iframe>' : 'Video Not Found'!!}
+                {!!$materi->getYoutubeID() ? '<iframe src="//www.youtube.com/embed/'.$materi->getYoutubeID().'" class="w-100 height-250"></iframe>' : 'Video tidak ditemukan'!!}
             </div>
         </div>
-    </div>
-    <div class="col-lg-4 col-12">
         <div class="card">
             <div class="card-body">
                 <button type="button" class="btn btn-outline-primary mr-1 mb-1 block" data-toggle="modal"
-                    data-target="#addquiz"><i class="feather icon-plus"></i> Add Quiz</button>
+                    data-target="#addvideo"><i class="feather icon-plus"></i> Tambah Video</button>
             </div>
         </div>
-        @if(count($materi->quizMateri) != 0)
-        @foreach($materi->quizMateri as $dt)
-        <!-- Konten Lists -->
+        @if(count($materi->materiVideo) != 0)
+        @foreach($materi->materiVideo as $dt)
         <div class="card">
             <div class="card-body">
-                <p>{{$dt->question}}</p>
-                <small>{{$dt->answer}}</small>
+                <p>{{$dt->order}} | {{$dt->video_name}}</p>
                 <hr>
-                <ul class="list-group">
-                    @if(count($dt->hasOption) != 0)
-                    @foreach($dt->hasOption as $opt)
-                    <li
-                        class="list-group-item d-flex justify-content-between align-items-center {{$opt->is_answer ? 'active' : ''}}">
-                        <span>{{$opt->option}}. {{$opt->description_option}}</span>
-                        <span class="badge ">
-                            <a data-toggle="modal" data-target="#editopt{{$opt->id}}"><i
-                                    class="feather icon-edit cursor-pointer"></i></a>
-                            <a data-toggle="modal" data-target="#delopt{{$opt->id}}"><i
-                                    class="feather icon-trash cursor-pointer"></i></a>
-                        </span>
-                    </li>
-                    <!-- edit option -->
-                    <div class="modal fade text-left" id="editopt{{$opt->id}}" tabindex="-1" role="dialog"
-                        aria-labelledby="myModalLabel17" aria-hidden="true">
-                        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" role="document">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h4 class="modal-title" id="myModalLabel17">Edit Pilihan</h4>
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
-                                </div>
-                                <div class="modal-body">
-                                    {!! Form::open(['url' => 'quiz-option/update/'.$opt->id , 'id' => 'form',
-                                    'method'=>'put']) !!}
-                                    <div class="row">
-                                        <div class="form-group col-sm-6">
-                                            <label for="option">Pilihan Jawaban.</label>
-                                            <select name="dt[option]" id="option">
-                                                <option value="A">A</option>
-                                                <option value="B">B</option>
-                                                <option value="C">C</option>
-                                                <option value="D">D</option>
-                                            </select>
-                                        </div>
-                                        <div class="form-group col-sm-6">
-                                            <label for="answer">Opsi ini jawaban ?</label>
-                                            <select name="dt[is_answer]" id="answer">
-                                                <option value="1" {{$opt->is_answer ? 'selected' : ''}}>YA!</option>
-                                                <option value="0" {{$opt->is_answer ? 'selected' : ''}}>Tidak.</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="email">Deskripsi Pilihan</label>
-                                        <textarea type="text" class="form-control input-solid"
-                                            placeholder="Deskripsi full"
-                                            name="dt[description_option]">{{$opt->description_option}}</textarea>
-                                    </div>
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="submit" class="btn btn-primary">Simpan</button>
-                                </div>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- delete option -->
-                    <div class="modal fade text-left" id="delopt{{$opt->id}}" tabindex="-1" role="dialog"
-                        aria-labelledby="myModalLabel17" aria-hidden="true">
-                        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" role="document">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h4 class="modal-title" id="myModalLabel17">Hapus Pilihan</h4>
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
-                                </div>
-                                <div class="modal-body">
-                                    <p>Yakin akan menghapus pilihan ini?</p>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-primary"
-                                            data-dismiss="modal">Tidak</button>
-                                        <a class="btn btn-danger"
-                                            href="{{ url('quiz-option/delete/'.$opt->id) }}">HAPUS</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    @endforeach
-                    @else
-                    <li class="list-group-item">No Option Found</li>
-                    @endif
-                </ul>
+                {!!$dt->getYoutubeID() ? '<iframe src="//www.youtube.com/embed/'.$materi->getYoutubeID().'" class="w-100 height-250"></iframe>' : 'Video tidak ditemukan'!!}
             </div>
             <div class="card-footer">
                 <div class="row">
                     <div class="col-sm-12 mr-1 text-center">
                         <div class="btn-group" role="group" aria-label="Basic example">
-                            <button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#addopt{{$dt->id}}"><i class="feather icon-plus"></i></button>
-                            <button type="button" class="btn btn-outline-info" data-toggle="modal" data-target="#editquiz{{$dt->id}}"><i class="feather icon-edit"></i></button>
-                            <button type="button" class="btn btn-outline-danger" data-toggle="modal" data-target="#delquiz{{$dt->id}}"><i class="feather icon-trash"></i></button>
+                            <button type="button" class="btn btn-outline-info" data-toggle="modal" data-target="#editvideo{{$dt->id}}"><i class="feather icon-edit"></i></button>
+                            <button type="button" class="btn btn-outline-danger" data-toggle="modal" data-target="#delvideo{{$dt->id}}"><i class="feather icon-trash"></i></button>
                         </div>
                     </div>
                 </div>
             </div>
-            <!-- Modal edit quiz -->
-            <div class="modal fade text-left" id="addopt{{$dt->id}}" tabindex="-1" role="dialog"
+            
+            <div class="modal fade text-left" id="editvideo{{$dt->id}}" tabindex="-1" role="dialog"
                 aria-labelledby="myModalLabel17" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h4 class="modal-title" id="myModalLabel17">Tambah Pilihan</h4>
+                            <h4 class="modal-title" id="myModalLabel17">Edit Video</h4>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
                         </div>
                         <div class="modal-body">
-                            {!! Form::open(['url' => 'quiz-option/insert', 'id' => 'form']) !!}
-                            <input type="hidden" value="{{$dt->id}}" name=dt[quiz_id]">
-                            <div class="row">
-                                <div class="form-group col-sm-6">
-                                    <label for="option">Pilihan Jawaban.</label>
-                                    <select name="dt[option]" id="option">
-                                        <option value="A">A</option>
-                                        <option value="B">B</option>
-                                        <option value="C">C</option>
-                                        <option value="D">D</option>
-                                    </select>
-                                </div>
-                                <div class="form-group col-sm-6">
-                                    <label for="answer">Opsi ini jawaban ?</label>
-                                    <select name="dt[is_answer]" id="answer">
-                                        <option value="1">YA!</option>
-                                        <option value="0">Tidak.</option>
-                                    </select>
-                                </div>
+                            {!! Form::open(['url' => 'materi-video/update/'.$dt->id , 'id' => 'form', 'method'=>'put']) !!}
+                            <input type="hidden" value="{{$dt->materi_id}}" name=dt[materi_id]">
+                            <div class="form-group">
+                                <label for="email">Nama video</label>
+                                <input type="text" class="form-control input-solid" placeholder="Nama Video . . ." value="{{$dt->video_name}}"
+                                    name="dt[video_name]">
                             </div>
                             <div class="form-group">
-                                <label for="email">Deskripsi Pilihan</label>
-                                <textarea type="text" class="form-control input-solid" placeholder="Deskripsi full"
-                                    name="dt[description_option]"></textarea>
-                            </div>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="submit" class="btn btn-primary">Simpan</button>
-                        </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-            <!-- End Edit Quiz -->
-            <!-- End Konten -->
-            <!-- add Quiz option -->
-            <!-- quiz edit -->
-            <div class="modal fade text-left" id="editquiz{{$dt->id}}" tabindex="-1" role="dialog"
-                aria-labelledby="myModalLabel17" aria-hidden="true">
-                <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h4 class="modal-title" id="myModalLabel17">Edit Quiz</h4>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                        <div class="modal-body">
-                            {!! Form::open(['url' => 'quiz/update/'.$dt->id , 'id' => 'form', 'method'=>'put']) !!}
-                            <input type="hidden" value="{{$dt->id}}" name=dt[materi_id]">
-                            <div class="form-group">
-                                <label for="email">Question</label>
-                                <textarea type="text" class="form-control input-solid"
-                                    placeholder="Pertanyaannya . . . " name="dt[question]">{{$dt->question}}</textarea>
+                                <label for="email">Video url</label>
+                                <input type="text" class="form-control input-solid" placeholder="Url Video . . ." value="{{$dt->video_url}}"
+                                    name="dt[video_url]">
                             </div>
                             <div class="form-group">
-                                <label for="email">Answer</label>
-                                <textarea type="text" class="form-control input-solid"
-                                    placeholder="Deskripsi Jawaban. . ." name="dt[answer]">{{$dt->answer}}</textarea>
+                                <label for="email">Urutan</label>
+                                <input type="number" min="1" value="{{$dt->order}}" class="form-control input-solid" placeholder="Urutan . . ."
+                                    name="dt[order]">
                             </div>
                         </div>
                         <div class="modal-footer">
@@ -248,21 +114,127 @@
                 </div>
             </div>
             <!-- quiz delete -->
-            <div class="modal fade text-left" id="delquiz{{$dt->id}}" tabindex="-1" role="dialog"
+            <div class="modal fade text-left" id="delvideo{{$dt->id}}" tabindex="-1" role="dialog"
                 aria-labelledby="myModalLabel17" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h4 class="modal-title" id="myModalLabel17">Hapus Quiz</h4>
+                            <h4 class="modal-title" id="myModalLabel17">Hapus Gambar</h4>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
                         </div>
                         <div class="modal-body">
-                            <p>Yakin akan menghapus quiz ini?</p>
+                            <p>Yakin akan menghapus video ini?</p>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-primary" data-dismiss="modal">Tidak</button>
-                                <a class="btn btn-danger" href="{{ url('quiz/delete/'.$dt->id) }}">HAPUS</a>
+                                <a class="btn btn-danger" href="{{ url('materi-video/delete/'.$dt->id) }}">HAPUS</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        @endforeach
+        @else
+            <div class="card">
+                <div class="card-header mb-1">
+                    <h4 class="card-title">Tidak Ada Video Lainnnya</h4>
+                </div>
+            </div>
+        @endif
+    </div>
+    <div class="col-lg-4 col-12">
+        <div class="card">
+            <div class="card-body">
+                <button type="button" class="btn btn-outline-primary mr-1 mb-1 block" data-toggle="modal"
+                    data-target="#addimage"><i class="feather icon-plus"></i> Tambah gambar</button>
+            </div>
+        </div>
+        @if(count($materi->materiImage) != 0)
+        @foreach($materi->materiImage as $dt)
+        <!-- Konten Lists -->
+        <div class="card">
+            <div class="card-body">
+                <p>{{$dt->order}} | {{$dt->image_name}}</p>
+                <hr>
+                @if($dt->image_url != null )
+                    <img class="img-fluid" src="{{ $dt->getPhoto() }}">
+                @else
+                    <img class="img-fluid" src="{{ asset('uploads/konten/blank.png') }}">
+                @endif
+                <p>{{$dt->description}}</p>
+            </div>
+            <div class="card-footer">
+                <div class="row">
+                    <div class="col-sm-12 mr-1 text-center">
+                        <div class="btn-group" role="group" aria-label="Basic example">
+                            <button type="button" class="btn btn-outline-info" data-toggle="modal" data-target="#editimage{{$dt->id}}"><i class="feather icon-edit"></i></button>
+                            <button type="button" class="btn btn-outline-danger" data-toggle="modal" data-target="#delimage{{$dt->id}}"><i class="feather icon-trash"></i></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="modal fade text-left" id="editimage{{$dt->id}}" tabindex="-1" role="dialog"
+                aria-labelledby="myModalLabel17" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h4 class="modal-title" id="myModalLabel17">Edit Gambar</h4>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            {!! Form::open(['url' => 'materi-image/update/'.$dt->id , 'id' => 'form', 'method'=>'put', 'enctype'=>'multipart/form-data']) !!}
+                            <input type="hidden" value="{{$dt->materi_id}}" name=dt[materi_id]">
+                            <div class="form-group">
+                                <label for="email">Nama Gambar</label>
+                                <input type="text" class="form-control input-solid" placeholder="Nama Gambar . . ." value="{{$dt->image_name}}"
+                                    name="dt[image_name]">
+                            </div>
+                            <div class="form-group">
+                                <label for="email">Gambar</label>
+                                <div class="custom-file">
+                                    <input type="file" class="form-control custom-file-input" id="inputGroupFile02" name="gambar">
+                                    <label class="custom-file-label" for="inputGroupFile02">Choose file</label>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="email">Urutan</label>
+                                <input type="number" min="1" value="{{$dt->order}}" class="form-control input-solid" placeholder="Urutan . . ."
+                                    name="dt[order]">
+                            </div>
+                            <div class="form-group">
+                                <label for="email">Deskripsi</label>
+                                <textarea type="text" class="form-control input-solid" placeholder="Deskripsi . . ."
+                                    name="dt[description]">{{$dt->description}}</textarea>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="submit" class="btn btn-primary">Simpan</button>
+                        </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <!-- quiz delete -->
+            <div class="modal fade text-left" id="delimage{{$dt->id}}" tabindex="-1" role="dialog"
+                aria-labelledby="myModalLabel17" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h4 class="modal-title" id="myModalLabel17">Hapus Gambar</h4>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <p>Yakin akan menghapus gambar ini?</p>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-primary" data-dismiss="modal">Tidak</button>
+                                <a class="btn btn-danger" href="{{ url('materi-image/delete/'.$dt->id) }}">HAPUS</a>
                             </div>
                         </div>
                     </div>
@@ -273,35 +245,37 @@
             @else
             <div class="card">
                 <div class="card-header mb-1">
-                    <h4 class="card-title">No Quiz Record Found</h4>
+                    <h4 class="card-title">Tidak Ada Gambar</h4>
                 </div>
             </div>
             @endif
         </div>
     </div>
-    <div class="col-lg-8 col-12">
-        <div class="card">
-            <div class="card-header">
-                <h4 class="card-title">Konten Materi</h4>
-            </div>
-            <div class="card-content collapse show">
-                <div class="card-body">
-                    <div class="row">
-                        <div class="col-sm-12">
-                            <div id="full-wrapper">
-                                <div id="full-container">
-                                    {!! Form::open(['url' => 'materi/update/content/'.$materi->id , 'method' => 'PUT', 'id' => 'form', 'enctype'=>'multipart/form-data' ]) !!}
-                                        <div class="editor">
-                                            <div class="form-group">
-                                                <textarea type="text" id='konten' class="form-control input-solid editor" name="dt[konten]">
-                                                    {!! $materi->konten !!}
-                                                </textarea>    
+    <div class="row">
+        <div class="col-lg-12 col-12">
+            <div class="card">
+                <div class="card-header">
+                    <h4 class="card-title">Konten Materi</h4>
+                </div>
+                <div class="card-content collapse show">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div id="full-wrapper">
+                                    <div id="full-container">
+                                        {!! Form::open(['url' => 'materi/update/content/'.$materi->id , 'method' => 'PUT', 'id' => 'form', 'enctype'=>'multipart/form-data' ]) !!}
+                                            <div class="editor">
+                                                <div class="form-group">
+                                                    <textarea type="text" id='konten' class="form-control input-solid editor" name="dt[konten]">
+                                                        {!! $materi->konten !!}
+                                                    </textarea>    
+                                                </div>
                                             </div>
-                                        </div>
-                                        <button type="submit" class="btn btn-primary">
-                                            Save
-                                        </button>
-                                    </form>
+                                            <button type="submit" class="btn btn-primary">
+                                                Save
+                                            </button>
+                                        </form>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -310,28 +284,33 @@
             </div>
         </div>
     </div>
-    <div class="modal fade text-left" id="addquiz" tabindex="-1" role="dialog" aria-labelledby="myModalLabel17"
+    <div class="modal fade text-left" id="addvideo" tabindex="-1" role="dialog" aria-labelledby="myModalLabel17"
 	aria-hidden="true">
 	<div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" role="document">
 		<div class="modal-content">
 			<div class="modal-header">
-				<h4 class="modal-title" id="myModalLabel17">Tambah Quiz</h4>
+				<h4 class="modal-title" id="myModalLabel17">Tambah Video</h4>
 				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 					<span aria-hidden="true">&times;</span>
 				</button>
 			</div>
 			<div class="modal-body">
-				{!! Form::open(['url' => 'quiz/insert', 'id' => 'form']) !!}
+				{!! Form::open(['url' => 'materi-video/insert', 'id' => 'form']) !!}
 				<input type="hidden" value="{{$materi->id}}" name=dt[materi_id]">
 				<div class="form-group">
-					<label for="email">Question</label>
-					<textarea type="text" class="form-control input-solid" placeholder="Pertanyaannya . . . "
-						name="dt[question]"></textarea>
+					<label for="email">Video Name</label>
+					<input type="text" class="form-control input-solid" placeholder="Video Name . . ."
+						name="dt[video_name]">
 				</div>
 				<div class="form-group">
-					<label for="email">Answer</label>
-					<textarea type="text" class="form-control input-solid" placeholder="Deskripsi Jawaban. . ."
-						name="dt[answer]"></textarea>
+					<label for="email">Video Url</label>
+					<textarea type="text" class="form-control input-solid" placeholder="Url Video . . ."
+						name="dt[video_url]"></textarea>
+				</div>
+                <div class="form-group">
+					<label for="email">Urutan</label>
+					<input type="number" min="1" value="1" class="form-control input-solid" placeholder="Urutan . . ."
+						name="dt[order]">
 				</div>
 			</div>
 			<div class="modal-footer">
@@ -340,6 +319,50 @@
 			</form>
 		</div>
 	</div>
+    </div>
+    <div class="modal fade text-left" id="addimage" tabindex="-1" role="dialog" aria-labelledby="myModalLabel17"
+	aria-hidden="true">
+	<div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h4 class="modal-title" id="myModalLabel17">Tambah Gambar</h4>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body">
+				{!! Form::open(['url' => 'materi-image/insert', 'id' => 'form', 'enctype'=>'multipart/form-data']) !!}
+				<input type="hidden" value="{{$materi->id}}" name=dt[materi_id]">
+				<div class="form-group">
+					<label for="email">Nama Gambar</label>
+					<input type="text" class="form-control input-solid" placeholder="Nama Gambar . . ."
+						name="dt[image_name]">
+				</div>
+				<div class="form-group">
+					<label for="email">Gambar</label>
+					<div class="custom-file">
+                        <input type="file" class="form-control custom-file-input" id="inputGroupFile02" name="gambar">
+                        <label class="custom-file-label" for="inputGroupFile02">Choose file</label>
+                    </div>
+				</div>
+                <div class="form-group">
+					<label for="email">Urutan</label>
+					<input type="number" min="1" value="1" class="form-control input-solid" placeholder="Urutan . . ."
+						name="dt[order]">
+				</div>
+                <div class="form-group">
+					<label for="email">Deskripsi</label>
+					<textarea type="text" class="form-control input-solid" placeholder="Deskripsi . . ."
+						name="dt[description]"></textarea>
+				</div>
+			</div>
+			<div class="modal-footer">
+				<button type="submit" class="btn btn-primary">Simpan</button>
+			</div>
+			</form>
+		</div>
+	</div>
+    </div>
 </div>
     @stop
     @section('scripts2')
