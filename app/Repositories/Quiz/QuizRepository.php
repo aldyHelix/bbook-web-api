@@ -26,9 +26,4 @@ class QuizRepository implements QuizInterface
 	{
 		return $this->quiz->find($id);
 	}
-
-	public function getQuizByMateriId($materi_id)
-	{
-		return $this->quiz->where('materi_id', $materi_id)->get();
-	}
 }

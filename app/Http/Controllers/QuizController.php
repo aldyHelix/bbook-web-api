@@ -24,7 +24,7 @@ class QuizController extends Controller
     }
     public function add()
     {
-        return view('users.add-edit', ['edit' => false]);
+        return view('quiz.add-edit', ['edit' => false]);
     }
     public function insert(Request $request)
     {
@@ -41,8 +41,8 @@ class QuizController extends Controller
     }
     public function edit($id)
     {
-        $data['users'] = $this->quizRepository->getQuizById($id);
-        return view('users.add-edit', ['edit' => true], $data);
+        $data['quiz'] = $this->quizRepository->getQuizById($id);
+        return view('quiz.add-edit', ['edit' => true], $data);
     }
     public function update(Request $request, $id)
     {
