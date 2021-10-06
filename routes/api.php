@@ -27,7 +27,11 @@ Route::get('/materi/qr/{key}', [Materi::class, 'getByQrKeySearchMateri'])->name(
 
 Route::get('/materi/{id}', [Materi::class, 'getByIdMateri'])->name('api-materi-id');
 
+Route::get('/materi-image/{id}', [Materi::class, 'getMateriImageById'])->name('api-materi-image-by-id');
+Route::get('/materi-video/{id}', [Materi::class, 'getMateriVideoById'])->name('api-materi-video-by-id');
+
 Route::get('/quiz/{id}', [Quiz::class, 'getQuizByMateriId'])->name('api-quiz-materi-id');
+Route::get('/quiz', [Quiz::class, 'index'])->name('api-quiz');
 
 Route::post('/login', [UserAuth::class, 'login']);
 Route::post('/register', [UserAuth::class, 'register']);

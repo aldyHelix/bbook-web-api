@@ -27,6 +27,11 @@ class MateriImageRepository implements MateriImageInterface
 		return $this->materi->find($id);
 	}
 
+	public function getMateriImageByMateriId($id)
+	{
+		return $this->materi->where('materi_id', $id)->get();
+	}
+
 	public function getMateriImageOrderByLastAdded()
 	{
 		return $this->materi->orderBy('created_at', 'desc')->take(10)->get();

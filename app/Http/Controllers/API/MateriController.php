@@ -6,15 +6,23 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
 use App\Repositories\Materi\MateriInterface as MateriInterface;
+use App\Repositories\MateriImage\MateriImageInterface as MateriImageInterface;
+use App\Repositories\MateriVideo\MateriVideoInterface as MateriVideoInterface;
 
 class MateriController extends Controller
 {
 
     private $materiRepository;
+    private $materiImageRepository;
+    private $materiVideoRepository;
 
-    public function __construct(MateriInterface $materiRepository)
+    public function __construct(MateriInterface $materiRepository, 
+        MateriImageInterface $materiImageRepository, 
+        MateriVideoInterface $materiVideoRepository)
     {
         $this->materiRepository = $materiRepository;
+        $this->materiImageRepository = $materiImageRepository;
+        $this->materiVideoRepository = $materiVideoRepository;
     }
 
     /**
@@ -52,19 +60,29 @@ class MateriController extends Controller
         ], 200);
     }
 
-    // public function getByQrKeySearchMateri($key)
-    // {
-    //     $data = $this->materiRepository->getMateriByQrKey($key);
-    //     return response([
-    //         'success' => true,
-    //         'message' => 'Qr Materi result',
-    //         'data' => $data
-    //     ], 200);
-    // }
-
     public function getByIdMateri($id)
     {
         $data = $this->materiRepository->getMateriById($id);
+        return response([
+            'success' => true,
+            'message' => 'list all materis',
+            'data' => $data
+        ], 200);
+    }
+
+    public function getMateriImageById($id)
+    {
+        $data = $this->materiImageRepository->getMateriImageByMateriId($id);
+        return response([
+            'success' => true,
+            'message' => 'list all materis',
+            'data' => $data
+        ], 200);
+    }
+
+    public function getMateriVideoById($id)
+    {
+        $data = $this->materiVideoRepository->getMateriVideoByMateriId($id);
         return response([
             'success' => true,
             'message' => 'list all materis',

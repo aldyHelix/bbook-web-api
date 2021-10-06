@@ -37,15 +37,4 @@ class QuizController extends Controller
             'data' => $data
         ], 200);
     }
-
-    public function getQuizByMateriId($materi_id)
-    {
-        $data = $this->quizRepository->getQuizByMateriId($materi_id);
-
-        return response([
-            'success' => true,
-            'message' => 'Quiz by id',
-            'data' => $data
-        ], 200);
-    }
 }
