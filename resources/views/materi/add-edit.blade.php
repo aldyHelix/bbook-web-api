@@ -80,7 +80,7 @@
                 <div class="form-group">
                     <label for="email">Konten</label>
                     <textarea type="text" id='konten' class="form-control input-solid editor" name="dt[konten]">
-                        {{ $edit ? htmlspecialchars($materis->konten ): old('konten') }}
+                        {!! $edit ? htmlspecialchars($materis->konten ): old('konten') !!}
                     </textarea>    
                 </div>
             </div>
