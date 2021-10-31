@@ -41,4 +41,11 @@ class MateriVideoRepository implements MateriVideoInterface
 	{
 		return $this->materi->where('materi_id', $materi_id)->orderBy('order', 'asc')->get();
 	}
+	
+	public function getAllMateriVideoOrderByMateri()
+	{
+		return $this->materi->with(['materi' => function ($query) {
+			$query->orderBy('order', 'asc');
+		}])->orderBy('order', 'asc')->get();
+	}
 }

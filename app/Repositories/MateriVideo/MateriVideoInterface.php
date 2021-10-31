@@ -8,4 +8,5 @@ interface MateriVideoInterface {
 	public function getMateriVideoByMateriId($id);
 	public function getMateriVideoOrderByLastAdded();
 	public function getMateriVideoOrderByOrderColumn($materi_id);
+	public function getAllMateriVideoOrderByMateri();
 }

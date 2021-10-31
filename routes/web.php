@@ -64,7 +64,7 @@ Route::group(['middleware' => ['auth']], function() {
     Route::group(['prefix' => 'materi-video'], function () {
         Route::post('/insert', [MateriVideo::class, 'insert'])->name('materi-video-insert');
         Route::put('/update/{id}', [MateriVideo::class, 'update'])->name('materi-video-update');
-        Route::get('/delete/{id}', [MateriVideo::class, 'destroy'])->name('materi-video-delete');
+        Route::get('/delete/{id}', [MateriVideo::class, 'destroy'])->name('materi-video-delete-video');
     });
 
     Route::group(['prefix' => 'quiz'], function () {

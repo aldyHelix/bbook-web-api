@@ -34,4 +34,9 @@ class MateriVideo extends Model
             return $match[1] = null;
         }
     }
+
+    public function materi()
+    {
+        return $this->belongsTo(Materi::class, 'materi_id');
+    }
 }

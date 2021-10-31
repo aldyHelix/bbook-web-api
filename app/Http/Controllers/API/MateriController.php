@@ -89,4 +89,14 @@ class MateriController extends Controller
             'data' => $data
         ], 200);
     }
+
+    public function getMateriVideo()
+    {
+        $data = $this->materiVideoRepository->getAllMateriVideoOrderByMateri();
+        return response([
+            'success' => true,
+            'message' => 'list all materis',
+            'data' => $data
+        ], 200);
+    }
 }

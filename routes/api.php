@@ -29,6 +29,7 @@ Route::get('/materi/{id}', [Materi::class, 'getByIdMateri'])->name('api-materi-i
 
 Route::get('/materi-image/{id}', [Materi::class, 'getMateriImageById'])->name('api-materi-image-by-id');
 Route::get('/materi-video/{id}', [Materi::class, 'getMateriVideoById'])->name('api-materi-video-by-id');
+Route::get('/materi-video', [Materi::class, 'getMateriVideo'])->name('api-materi-video');
 
 Route::get('/quiz/{id}', [Quiz::class, 'getQuizByMateriId'])->name('api-quiz-materi-id');
 Route::get('/quiz', [Quiz::class, 'index'])->name('api-quiz');
