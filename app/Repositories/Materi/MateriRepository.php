@@ -43,6 +43,11 @@ class MateriRepository implements MateriInterface
 		return $this->materi->where('qr_code', $key)->first();
 	}
 
+    public function getMateriByBab($bab)
+    {
+        return $this->materi->where('bab', $bab)->orderBy('order', 'ASC')->get();
+    }
+
 	public function getQuizByMateriId($id)
 	{
 		return $this->materi->find($id)->quiz()->get();

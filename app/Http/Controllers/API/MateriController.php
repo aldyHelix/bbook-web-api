@@ -16,8 +16,8 @@ class MateriController extends Controller
     private $materiImageRepository;
     private $materiVideoRepository;
 
-    public function __construct(MateriInterface $materiRepository, 
-        MateriImageInterface $materiImageRepository, 
+    public function __construct(MateriInterface $materiRepository,
+        MateriImageInterface $materiImageRepository,
         MateriVideoInterface $materiVideoRepository)
     {
         $this->materiRepository = $materiRepository;
@@ -43,6 +43,16 @@ class MateriController extends Controller
     public function getLatestMateri()
     {
         $data = $this->materiRepository->getMateriOrderByLastAdded();
+        return response([
+            'success' => true,
+            'message' => 'list all materis',
+            'data' => $data
+        ], 200);
+    }
+
+    public function getBabMateri($bab)
+    {
+        $data = $this->materiRepository->getMateriByBab($bab);
         return response([
             'success' => true,
             'message' => 'list all materis',

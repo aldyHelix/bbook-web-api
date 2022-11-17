@@ -52,11 +52,15 @@
             <h4 class="card-title">{{$d->nama_materi}}</h4>
             <p class="card-text">{{$d->deskripsi}}</p>
             <div class="row text-center">
-              <div class="col-xs-4 text-center item">
-                urutan : 
+              <div class="col-xs-3 text-center item">
+                urutan :
                 <h1 class="font-weight-bolder">{{ $d->order ?? 0 }}</h1>
               </div>
-              <div class="col-4 item-button-icon">
+              <div class="col-xs-3 text-center item">
+                BAB :
+                <h1 class="font-weight-bolder">{{ $d->bab ?? '-' }}</h1>
+              </div>
+              <div class="col-3 item-button-icon">
                 <a href="{{ url('materi/edit/'.$d->id) }}" class="btn btn-icon"
                   title="@lang('Edit')" data-toggle="tooltip" data-placement="top">
                       <i class="feather icon-edit"></i>
@@ -67,7 +71,7 @@
                   </a>
                 </span>
               </div>
-              <div class="col-xs-4 item">
+              <div class="col-xs-3 item">
                 <a href="{{ url('materi/detail/'.$d->id) }}" class="btn btn-outline-primary waves-effect pull-right"> Lihat Detail</a>
               </div>
             </div>

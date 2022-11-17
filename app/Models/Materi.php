@@ -23,7 +23,8 @@ class Materi extends Model
         'video_stream',
         'image',
         'status',
-        'order'
+        'order',
+        'bab'
     ];
 
     public function getPhoto()

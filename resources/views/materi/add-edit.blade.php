@@ -56,6 +56,10 @@
                     <label for="department">Urutan Materi</label>
                     <input type="text" class="form-control input-solid" placeholder="Urutan Materi" name="dt[order]" value="{{ $edit ? $materis->order : old('order') }}">
                 </div>
+                <div class="form-group">
+                    <label for="department">BAB Materi</label>
+                    <input type="text" class="form-control input-solid" placeholder="Bab Materi" name="dt[bab]" value="{{ $edit ? $materis->bab : old('bab') }}">
+                </div>
                 <div class="row">
                     <div class="col-md-6">
                         <div class="form-group">
@@ -81,7 +85,7 @@
                     <label for="email">Konten</label>
                     <textarea type="text" id='konten' class="form-control input-solid editor" name="dt[konten]">
                         {!! $edit ? htmlspecialchars($materis->konten ): old('konten') !!}
-                    </textarea>    
+                    </textarea>
                 </div>
             </div>
         </div>

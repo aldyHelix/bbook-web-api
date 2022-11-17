@@ -8,6 +8,7 @@ use App\Http\Controllers\MateriController as Materi;
 use App\Http\Controllers\MateriImageController as MateriImage;
 use App\Http\Controllers\MateriVideoController as MateriVideo;
 use App\Http\Controllers\QuizController as Quiz;
+use App\Http\Controllers\PetunjukController as Petunjuk;
 use App\Http\Controllers\QuizOptionController as QuizOption;
 /*
 |--------------------------------------------------------------------------
@@ -74,5 +75,14 @@ Route::group(['middleware' => ['auth']], function() {
         Route::get('/edit/{id}', [Quiz::class, 'edit']);
         Route::put('/update/{id}', [Quiz::class, 'update']);
         Route::get('/delete/{id}', [Quiz::class, 'delete']);
+    });
+
+    Route::group(['prefix' => 'petunjuk'], function () {
+        Route::get('/', [Petunjuk::class, 'show']);
+        Route::get('/add', [Petunjuk::class, 'add']);
+        Route::post('/insert', [Petunjuk::class, 'insert']);
+        Route::get('/edit/{id}', [Petunjuk::class, 'edit']);
+        Route::put('/update/{id}', [Petunjuk::class, 'update']);
+        Route::get('/delete/{id}', [Petunjuk::class, 'delete']);
     });
 });

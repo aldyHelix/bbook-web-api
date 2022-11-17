@@ -4,7 +4,9 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\API\MateriController as Materi;
 use App\Http\Controllers\API\QuizController as Quiz;
+use App\Http\Controllers\API\PetunjukController as Petunjuk;
 use App\Http\Controllers\API\UserAuthController as UserAuth;
+
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -23,7 +25,9 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::get('/materi', [Materi::class, 'index'])->name('api-materi-index');
 Route::get('/materi/latest', [Materi::class, 'getLatestMateri'])->name('api-materi-latest');
 Route::get('/materi/search/{key}', [Materi::class, 'getByKeySearchMateri'])->name('api-materi-search');
+Route::get('/materi/bab/{bab}', [Materi::class, 'getBabMateri'])->name('api-materi-bab');
 Route::get('/materi/qr/{key}', [Materi::class, 'getByQrKeySearchMateri'])->name('api-materi-qr-search');
+
 
 Route::get('/materi/{id}', [Materi::class, 'getByIdMateri'])->name('api-materi-id');
 
@@ -34,9 +38,12 @@ Route::get('/materi-video', [Materi::class, 'getMateriVideo'])->name('api-materi
 Route::get('/quiz/{id}', [Quiz::class, 'getQuizByMateriId'])->name('api-quiz-materi-id');
 Route::get('/quiz', [Quiz::class, 'index'])->name('api-quiz');
 
+Route::get('petunjuk', [Petunjuk::class, 'getPetunjuk'])->name('api-petunjuk');
+Route::get('petunjuk/soal', [Petunjuk::class, 'getPetunjukSoal'])->name('api-petunjuk-soal');
+
 Route::post('/login', [UserAuth::class, 'login']);
 Route::post('/register', [UserAuth::class, 'register']);
 Route::post('/cek-email', [UserAuth::class, 'cekEmail']);
 //quizlist
 //register
-//login     
+//login
