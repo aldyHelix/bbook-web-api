@@ -35,8 +35,9 @@ Route::get('/materi-image/{id}', [Materi::class, 'getMateriImageById'])->name('a
 Route::get('/materi-video/{id}', [Materi::class, 'getMateriVideoById'])->name('api-materi-video-by-id');
 Route::get('/materi-video', [Materi::class, 'getMateriVideo'])->name('api-materi-video');
 
-Route::get('/quiz/{id}', [Quiz::class, 'getQuizByMateriId'])->name('api-quiz-materi-id');
 Route::get('/quiz', [Quiz::class, 'index'])->name('api-quiz');
+Route::get('/quiz/{id}', [Quiz::class, 'getQuizByMateriId'])->name('api-quiz-materi-id');
+Route::get('/quiz/bab/{bab}', [Quiz::class, 'getQuizByBab'])->name('api-quiz-bab');
 
 Route::get('petunjuk', [Petunjuk::class, 'getPetunjuk'])->name('api-petunjuk');
 Route::get('petunjuk/soal', [Petunjuk::class, 'getPetunjukSoal'])->name('api-petunjuk-soal');

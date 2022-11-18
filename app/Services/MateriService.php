@@ -53,7 +53,7 @@ class MateriService
 			$nama_file1 = time()."_".$gambar->getClientOriginalName();
 			$tujuan_upload = 'uploads/materi';
 			$gambar->move($tujuan_upload,$nama_file1);
-			$data['gambar_materi'] = $nama_file1;
+			$data['image'] = $nama_file1;
 	  }
 
 	  $getData = $this->materiRepository->getMateriById($id);

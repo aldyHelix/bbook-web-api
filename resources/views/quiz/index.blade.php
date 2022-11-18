@@ -22,10 +22,13 @@
                     <thead>
                     <tr>
                         <th class="min-width-100">@lang('No')</th>
-                        <th class="min-width-150">@lang('Question')</th>
+                        <th class="min-width-150">@lang('Judul')</th>
+                        <th class="min-width-150">@lang('Gambar')</th>
+                        <th class="min-width-150">@lang('Pertanyaan')</th>
                         <th class="min-width-150">@lang('Jawaban')</th>
-                        <th class="min-width-150">@lang('Poin')</th>
+                        <th class="min-width-150">@lang('Bab')</th>
                         <th class="min-width-150">@lang('Urutan')</th>
+                        <th class="min-width-150">@lang('Status')</th>
                         <th class="min-width-150">@lang('Action')</th>
                     </tr>
                     </thead>
@@ -34,10 +37,13 @@
                             @foreach($quizs as $no=>$d)
                                 <tr>
                                     <td>{{$no+1}}</td>
-                                    <td>{{$d->question_text}}</td>
-                                    <td>{{$d->answer}}</td>
-                                    <td>{{$d->point}}</td>
+                                    <td>{{$d->header}}</td>
+                                    <td>{{$d->image}}</td>
+                                    <td>{{$d->question}}</td>
+                                    <td>{{$d->answer_index}}</td>
+                                    <td>{{$d->bab}}</td>
                                     <td>{{$d->order}}</td>
+                                    <td>{{$d->status}}</td>
                                     <td>
                                         <a href="{{ url('quiz/edit/'.$d->id) }}" class="btn btn-icon"
                                             title="@lang('Edit')" data-toggle="tooltip" data-placement="top">
@@ -56,7 +62,7 @@
                             @endforeach
                         @else
                             <tr>
-                                <td colspan="6"><em>@lang('No records found.')</em></td>
+                                <td colspan="9"><em>@lang('No records found.')</em></td>
                             </tr>
                         @endif
                     </tbody>

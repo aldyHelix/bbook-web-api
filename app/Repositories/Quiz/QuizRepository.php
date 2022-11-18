@@ -22,6 +22,11 @@ class QuizRepository implements QuizInterface
 		return $this->quiz->get();
 	}
 
+    public function getQuizByBab($bab)
+	{
+		return $this->quiz->where('bab', $bab)->orderBy('order', 'ASC')->get();
+	}
+
 	public function getQuizById($id)
 	{
 		return $this->quiz->find($id);

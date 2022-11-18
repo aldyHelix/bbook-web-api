@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Quiz extends Model
 {
     use HasFactory;
-    protected $table = 'questions';
+    protected $table = 'quizs';
 
 
     /**
@@ -17,23 +17,27 @@ class Quiz extends Model
      * @var array
      */
     protected $fillable = [
-        'question_text',
+        'header',
+        'question',
+        'is_picture_quiz',
+        'image',
+        'answer_index',
         'order',
-        'text_option_a',
-        'text_option_b',
-        'text_option_c',
-        'text_option_d',
-        'text_option_e',
-        'point',
-        'answer',
+        'bab',
+        'status',
+        'option_a',
+        'option_b',
+        'option_c',
+        'option_d',
+        'option_e',
     ];
 
-    public function materiQuiz()
+    public function getPhoto()
     {
-        return $this->belongsTo(Materi::class, 'materi_id');
+        return asset('uploads/quiz/'.$this->image);
     }
-    public function hasOption()
+    public function defaultPhoto()
     {
-        return $this->hasMany(QuizOption::class);
+        return asset('uploads/konten/blank.png');
     }
 }

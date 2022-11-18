@@ -28,7 +28,10 @@
                         </ul>
                         <ul class="nav navbar-nav">
                             <li class="nav-item d-none d-lg-block"><a class="nav-link" href="{{ url('petunjuk') }}" data-toggle="tooltip" data-placement="top" title="Petunjuk"><i class="ficon feather icon-clipboard"></i></a></li>
-                       </ul>
+                        </ul>
+                        <ul class="nav navbar-nav">
+                            <li class="nav-item d-none d-lg-block"><a class="nav-link" href="{{ url('quiz') }}" data-toggle="tooltip" data-placement="top" title="Quiz"><i class="ficon feather icon-help-circle"></i></a></li>
+                        </ul>
                         <ul class="nav navbar-nav">
                              <li class="nav-item d-none d-lg-block"><a class="nav-link" href="{{ url('materi/add') }}" data-toggle="tooltip" data-placement="top" title="Add Materi"><i class="ficon feather icon-plus"></i></a></li>
                         </ul>
