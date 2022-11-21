@@ -33,7 +33,7 @@ class PetunjukController extends Controller
 
     public function getPetunjukSoal()
     {
-        $data = $this->PetunjukRepository->getPetunjukSoal();
+        $data = $this->petunjukRepository->getPetunjukSoal();
         return response([
             'success' => true,
             'message' => 'success',
