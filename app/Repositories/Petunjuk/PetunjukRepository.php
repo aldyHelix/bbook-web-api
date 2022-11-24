@@ -31,4 +31,16 @@ class PetunjukRepository implements PetunjukInterface
     {
         return $this->petunjuk->where('kode_petunjuk', 'soal')->get();
     }
+    public function getPetunjukGuru()
+    {
+        return $this->petunjuk->where('kode_petunjuk', 'guru')->get();
+    }
+    public function getPetunjukSiswa()
+    {
+        return $this->petunjuk->where('kode_petunjuk', 'siswa')->get();
+    }
+    public function getPetunjukAbout()
+    {
+        return $this->petunjuk->where('kode_petunjuk', 'about')->get();
+    }
 }

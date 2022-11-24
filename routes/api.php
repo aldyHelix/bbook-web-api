@@ -41,6 +41,9 @@ Route::get('/quiz/bab/{bab}', [Quiz::class, 'getQuizByBab'])->name('api-quiz-bab
 
 Route::get('petunjuk', [Petunjuk::class, 'getPetunjuk'])->name('api-petunjuk');
 Route::get('petunjuk/soal', [Petunjuk::class, 'getPetunjukSoal'])->name('api-petunjuk-soal');
+Route::get('petunjuk/guru', [Petunjuk::class, 'getPetunjukGuru'])->name('api-petunjuk-guru');
+Route::get('petunjuk/siswa', [Petunjuk::class, 'getPetunjukSiswa'])->name('api-petunjuk-siswa');
+Route::get('petunjuk/about', [Petunjuk::class, 'getPetunjukAbout'])->name('api-petunjuk-About');
 
 Route::post('/login', [UserAuth::class, 'login']);
 Route::post('/register', [UserAuth::class, 'register']);

@@ -40,4 +40,34 @@ class PetunjukController extends Controller
             'data' => $data
         ], 200);
     }
+
+    public function getPetunjukGuru()
+    {
+        $data = $this->petunjukRepository->getPetunjukGuru();
+        return response([
+            'success' => true,
+            'message' => 'success',
+            'data' => $data
+        ], 200);
+    }
+
+    public function getPetunjukSiswa()
+    {
+        $data = $this->petunjukRepository->getPetunjukSiswa();
+        return response([
+            'success' => true,
+            'message' => 'success',
+            'data' => $data
+        ], 200);
+    }
+
+    public function getPetunjukAbout()
+    {
+        $data = $this->petunjukRepository->getPetunjukAbout();
+        return response([
+            'success' => true,
+            'message' => 'success',
+            'data' => $data
+        ], 200);
+    }
 }
